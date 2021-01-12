@@ -1,0 +1,59 @@
+<h1 class="page-title">
+    {{ (!id) ? 'New User' : 'Edit User' }}
+</h1>
+<hr>
+<div class="row grid-margin">
+    <div class="col-lg-12">
+        <div class="btn-group float-right">
+            <a class="btn btn-success" [routerLink]="['/users']">
+                <i class="fa fa-chevron-circle-left"></i> Go Back
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row grid-margin">
+    <div class="col-lg-12 grid-margin grid-margin-lg-0">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Fill the following fields</h2>
+                <form class="forms-sample" (ngSubmit)="onSubmit($event)">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <div class="form-row">
+                                <label for="module">Module</label>&nbsp;&nbsp;
+                                <select  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.module"  id="module">
+                                    <option>Select an option</option>
+                                    <option *ngFor="let module of modules" [ngValue]="module.id">{{ module.name }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label for="create">Create:</label>&nbsp;&nbsp;
+                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.create" id="create">
+                        </div>
+                        <div class="form-group col">
+                            <label for="read">Read:</label>&nbsp;&nbsp;
+                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.read" id="read">
+                        </div>
+                        <div class="form-group col">
+                            <label for="update">Update:</label>&nbsp;&nbsp;
+                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.update" id="update">
+
+                        </div>
+                        <div class="col">
+                            <label for="delete">Delete</label>&nbsp;&nbsp;
+                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.delete" id="delete">
+                    </div>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a [routerLink]="['/permission']" class="btn btn-primary">
+                Cancel
+            </a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

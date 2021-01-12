@@ -1,0 +1,119 @@
+<h1 class="page-title">
+    {{ (!id) ? 'New User' : 'Edit User' }}
+</h1>
+<hr>
+<div class="row grid-margin">
+    <div class="col-lg-12">
+    	<div class="btn-group float-right">
+    		<a class="btn btn-success" [routerLink]="['/users']">
+                <i class="fa fa-chevron-circle-left"></i> Go Back
+            </a>
+    	</div>
+    </div>
+</div>
+<div class="row grid-margin">
+    <div class="col-lg-12 grid-margin grid-margin-lg-0">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Fill the following fields</h2>
+                <form class="forms-sample" (ngSubmit)="onSubmit($event)" >
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="username">UserName *</label>
+                            <input   [ngModelOptions]="{standalone: true}" [(ngModel)]="form.username" class="form-control" id="username" aria-describedby="username_help" placeholder="User name" autocomplete="off">
+                            <small id="username_help" class="form-text text-muted text-success">user name help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="pswd">Password *</label>
+                            <input   [ngModelOptions]="{standalone: true}" type="password" [(ngModel)]="form.password" class="form-control" id="password" >
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="active">Activate User?</label>
+                            <select [ngModelOptions]="{standalone: true}" [(ngModel)]="form.active" class="form-control" id="gender" aria-describedby="gender_help">
+                                <option>Select an option</option>
+                                <option *ngFor="let a of active" [ngValue]="a.id">{{ a.name }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="role">Role</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.type" class="form-control" id="type" aria-describedby="role_help" placeholder="role" autocomplete="off">
+                            <small id="role_help " class="form-text text-muted text-success">type help (roles are admin,user,manager)</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="name">First name *</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.name" class="form-control" id="name" aria-describedby="name_help" placeholder="First name" autocomplete="off">
+                            <small id="name_help" class="form-text text-muted text-success">First name help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="lastname">Last name *</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.lastname" class="form-control" id="lastname" aria-describedby="lastname_help" placeholder="Last name" autocomplete="off">
+                            <small id="lastname_help" class="form-text text-muted text-success">Last name help</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="phone">Phone</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.phone" class="form-control" id="phone" aria-describedby="phone_help" placeholder="Phone number" autocomplete="off">
+                            <small id="phone_help" class="form-text text-muted text-success">Phone help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="mobile">Mobile</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.mobile" class="form-control" id="mobile" aria-describedby="mobile_help" placeholder="Mobile number" autocomplete="off">
+                            <small id="mobile_help" class="form-text text-muted text-success">Mobile help</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="city">City *</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.city" class="form-control" id="city" aria-describedby="city_help" placeholder="City" autocomplete="off">
+                            <small id="city_help" class="form-text text-muted text-success">City help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="country">Country *</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.country" class="form-control" id="country" aria-describedby="country_help" placeholder="Country" autocomplete="off">
+                            <small id="country_help" class="form-text text-muted text-success">Country help</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="age">Age</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.age" type="number" step="1" min="0" class="form-control" id="age" aria-describedby="age_help" placeholder="Age" autocomplete="off">
+                            <small id="age_help" class="form-text text-muted text-success">Age help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="gender">Gender</label>
+                            <select [ngModelOptions]="{standalone: true}" [(ngModel)]="form.gender" class="form-control" id="gender" aria-describedby="gender_help">
+                                <option>Select an option</option>
+                                <option *ngFor="let gender of genders" [ngValue]="gender.id">{{ gender.name }}</option>
+                            </select>
+                            <small id="gender_help" class="form-text text-muted text-success">Gender help</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="email">Email</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.email" class="form-control" id="email" aria-describedby="email_help" placeholder="Email" autocomplete="off">
+                            <small id="email_help" class="form-text text-muted text-success">Email help</small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="organization">Organization</label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.organization" class="form-control" id="organization" aria-describedby="organization_help" placeholder="Last name" autocomplete="off">
+                            <small id="organization_help" class="form-text text-muted text-success">Organization help</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a [routerLink]="['/users']" class="btn btn-light">
+                        Cancel
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

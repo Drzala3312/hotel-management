@@ -1,0 +1,118 @@
+<h1 class="page-title">
+    User No. {{ id }}
+    <a class="badge badge-warning float-right" [routerLink]="['/users/edit', id]">Edit</a>
+</h1>
+<hr>
+<div class="row grid-margin">
+    <div class="col-lg-12" *ngIf="user$.view !== null">
+        <small>Created on {{ user$.view.created_at | date: 'dd/MM/yyyy HH:mm:ss' }}</small>
+    	<div class="btn-group float-right">
+            <a class="btn btn-success" [routerLink]="['/users']">
+                <i class="fa fa-chevron-circle-left"></i> Go Back
+            </a>
+    	</div>
+    </div>
+</div>
+<div class="row grid-margin">
+    <div class="col-lg-12 grid-margin grid-margin-lg-0">
+        <div class="card">
+            <div class="card-body" *ngIf="user$.isLoading == true">
+                <loading-spinner></loading-spinner>
+            </div>
+            <div class="card-body" *ngIf="user$.view !== null && user$.isLoading == false">
+                <div class="alert alert-success" role="alert" *ngIf="user$.saved">
+                    <h4 class="alert-heading">Success!</h4>
+                </div>
+                <h3>
+                    User Information
+                </h3>
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>Name</b>
+                        <p>{{ user$.view.name }} {{ user$.view.lastname }}</p>
+                    </div>
+                    <div class="col">
+                        <b>User Name</b>
+                        <p>{{ user$.view.userName }}</p>
+                    </div>
+
+                </div>
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>Role</b>
+                        <p>{{user$.view.type}}</p>
+                    </div>
+                    <div class="col">
+                        <b>Active</b>
+                        <p>
+                            {{ (user$.view.active == 1) ? 'Yes' : 'No' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>Age</b>
+                        <p>
+                            {{ user$.view.age }}
+                        </p>
+                    </div>
+                    <div class="col">
+                        <b>Gender</b>
+                        <p>
+                            {{ (user$.view.gender == 'M') ? 'Male' : 'Female' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>Phone</b>
+                        <p>
+                            <a href="tel:{{ user$.view.phone }}" title="Make a call">
+                                {{ user$.view.phone }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col">
+                        <b>Mobile</b>
+                        <p>
+                            <a href="tel:{{ user$.view.mobile }}" title="Make a call">
+                                {{ user$.view.mobile }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>City</b>
+                        <p>
+                            {{ user$.view.city }}
+                        </p>
+                    </div>
+                    <div class="col">
+                        <b>Country</b>
+                        <p>
+                            {{ user$.view.country }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="user$.view">
+                    <div class="col">
+                        <b>Email</b>
+                        <p>
+                            <a href="mailto:{{ user$.view.email }}" title="Send an email">
+                                {{ user$.view.email }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col">
+                        <b>Organization</b>
+                        <p>
+                            {{ user$.view.organization }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{
+    "app": {
+        "name": "api.hms.local",
+        "version": "1.0.0"
+    },
+    "jwt": {
+        "secret": "T=_afU=bJq[p%Z6S",
+        "audience": "users.api.hms.local",
+        "issuer": "api.hms.local",
+        "jwtid": "jwt.api.hms.local",
+        "subject": "hms.local"
+    },
+    "server": {
+        "port": 1337,
+        "name": "api.hms.local",
+        "defaultVersion": "1.0.0",
+        "acceptable": [ "application/json" ],
+        "throttleRate": 50,
+        "throttleBurst": 100
+    },
+    "db": {
+        "name": "hms",
+        "username": "root",
+        "password": "root",
+        "config": {
+            "host": "localhost",
+            "port": 3306,
+            "dialect": "mysql",
+            "pool": {
+                "max": 10,
+                "min": 0,
+                "idle": 10000
+            },
+            "define": {
+                "timestamps": false
+            }
+        }
+    },
+    "logging": {
+        "name": "hms-log",
+        "dir": "logs/"
+    },
+    "key": {
+        "path": "keys/server.key"
+    }
+}

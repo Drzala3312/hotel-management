@@ -1,0 +1,95 @@
+<h1 class="page-title">User List</h1>
+<hr>
+
+<div class="row grid-margin">
+    <div class="col">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" class="form-control" placeholder="search" #input>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <div class="btn-group float-right">
+            <a class="btn btn-success" [routerLink]="['create']">
+                <i class="fa fa-plus-circle"></i> New User
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="mat-elevation-z8">
+    <mat-table #table mat-table [dataSource]="dataSource" class="table-responsive mat-elevation-z8" matSort>
+        <ng-container matColumnDef="detail">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="detail">Details
+            </mat-header-cell>
+            <mat-cell *matCellDef="let data">
+              <a [routerLink]="['view', data.uid]" title="View Guest Details" class="btn">
+                  <i class="fa fa-file-text-o "></i>
+              </a>
+            </mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="name">Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let data">
+
+            <span class="table__text">
+              {{data?.name}} {{data?.lastname}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="userName">User Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let data">
+
+            <span class="table__text">
+              {{data?.userName}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="role">Role
+          </mat-header-cell>
+          <mat-cell *matCellDef="let data">
+
+            <span class="table__text">
+              {{data?.type}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="email">Email
+          </mat-header-cell>
+          <mat-cell *matCellDef="let data">
+            <span class="table__text">
+              {{(data?.email)}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="action">#
+          </mat-header-cell>
+          <mat-cell *matCellDef="let data">
+
+            <a [routerLink]="['edit', data.uid]" title="Edit User">
+                <i class="fa fa-pencil"></i>
+            </a> &nbsp; &nbsp;
+            <span (click)="deleteUser(data.uid)" style="cursor:pointer;">
+                <i class="fa fa-trash"></i>
+           </span>
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row style="background-color:#f3f3f3 ;" *matHeaderRowDef="displayColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+      </mat-table>
+      <div *ngIf="isNoData" class="isNoData">No Enteries Found!</div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

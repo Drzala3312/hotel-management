@@ -1,0 +1,5 @@
+.DS_Store
+resources/.DS_Store
+resources/schema/*.bak
+website/
+.vscode
