@@ -39,10 +39,10 @@ routes.push({
                             pid: permission.id,
                             module: permission.module,
                             pname: permission.pname,
-                            create: permission.create,
-                            read: permission.read,
-                            edit: permission.edit,
-                            delete: permission.delete
+                            create: (permission.dataValues.create == '1') ? true : false,
+                            read: (permission.dataValues.read == '1') ? true : false,
+                            edit: (permission.dataValues.edit == '1') ? true : false,
+                            delete: (permission.dataValues.delete == '1') ? true : false,
                         }
                     );
                 });
@@ -88,13 +88,13 @@ routes.push({
             .then((permission) => {
                 const resObj = {
                     pid: permission.id,
+                    module: permission.module,
                     pname: permission.pname,
-                    create: permission.create,
-                    read: permission.read,
-                    edit: permission.edit,
-                    delete: permission.delete
+                    create: (permission.create == '1') ? true : false,
+                    read: (permission.read == '1') ? true : false,
+                    edit: (permission.edit == '1') ? true : false,
+                    delete: (permission.delete == '1') ? true : false,
                 };
-
                 res.json(resObj);
                 return next();
             });
@@ -167,12 +167,13 @@ routes.push({
             module: req.body.module,
             create: req.body.create,
             read: req.body.read,
-            edit: req.body.edit,
-            delete: req.body.delte,
+            edit: req.body.update,
+            delete: req.body.delete,
         };
 
+        console.log(models.permission);
         // update record
-        models.permissions
+        models.permission
             .find({
                 where: {
                     id: {

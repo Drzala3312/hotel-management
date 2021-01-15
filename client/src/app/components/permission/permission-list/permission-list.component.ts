@@ -10,7 +10,7 @@ import { PermissionController } from '../../../ducks/permissions/permission.cont
   styleUrls: ['./permission-list.component.css']
 })
 export class PermissionListComponent implements OnInit {
-    displayColumns: string[] = ['detail','name', 'module', 'create', 'read','edit','delete', 'action'];
+    displayColumns: string[] = ['name', 'module', 'create', 'read','edit','delete', 'action'];
     dataSource = new MatTableDataSource();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -41,10 +41,10 @@ export class PermissionListComponent implements OnInit {
     }
 }
 
-public deleteUser(uid) {
+public deleteUser(pid) {
     var ans = confirm("Are you sure?");
     if (ans) {
-        this.pc.deletePermission(uid);
+        this.pc.deletePermission(pid);
         location.reload();
     }
 }

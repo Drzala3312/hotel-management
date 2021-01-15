@@ -42,6 +42,10 @@ export const ROUTES: Routes = [
                 path: 'permissions',
                 loadChildren: () => import('./components/permission/permission.module').then(m => m.PermissionModule),
                 canActivate: [AuthGuard]
+            },{
+                path: 'roles',
+                loadChildren: () => import('./components/roles/role.module').then(m => m.RoleModule),
+                canActivate: [AuthGuard]
             },
         ]
     },
