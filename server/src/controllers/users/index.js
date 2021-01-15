@@ -231,7 +231,7 @@ routes.push({
                 },
             })
             .then((data) => {
-                return data.updateAttributes(form);
+                return data.update(form);
             })
             .then((data) => {
                 res.json(data);
