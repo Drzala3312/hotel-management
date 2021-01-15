@@ -31,13 +31,13 @@
           </ng-container>
 
 
-        <ng-container matColumnDef="role">
-          <mat-header-cell *matHeaderCellDef mat-sort-header="role">Role
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="name">Role
           </mat-header-cell>
           <mat-cell *matCellDef="let data">
 
             <span class="table__text">
-              {{data?.type}}
+              {{data?.name}}
             </span>
           </mat-cell>
         </ng-container>
@@ -49,10 +49,10 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let data">
 
-            <a [routerLink]="['edit', data.uid]" title="Edit User">
+            <a [routerLink]="['edit', data.rid]" title="Edit ROle">
                 <i class="fa fa-pencil"></i>
             </a> &nbsp; &nbsp;
-            <span (click)="deleteUser(data.uid)" style="cursor:pointer;">
+            <span (click)="deleteRole(data.rid)" style="cursor:pointer;">
                 <i class="fa fa-trash"></i>
            </span>
           </mat-cell>
