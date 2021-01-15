@@ -179,7 +179,8 @@ const setupMiddleware = (middlewareName) => {
     'payments',
     'cancellations',
     'services',
-    'permissions'
+    'permissions',
+    'role_permissions'
 ].forEach(setupMiddleware);
 
 /**

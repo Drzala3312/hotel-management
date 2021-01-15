@@ -224,9 +224,9 @@ CREATE TABLE `permissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
--- Table `hms`.`role_permission`
+-- Table `hms`.`role_permissions`
 -- -----------------------------------------------------
-CREATE TABLE `role_permission` (
+CREATE TABLE `role_permissions` (
   `rid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   PRIMARY KEY (`rid`,`pid`)

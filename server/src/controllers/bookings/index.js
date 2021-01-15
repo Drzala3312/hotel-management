@@ -515,7 +515,7 @@ routes.push({
     },
     middleware: (req, res, next) => {
 
-        sequelize.query("SELECT p.create,p.read,p.edit,p.delete,p.module from role_permission as rp,permissions as p where p.module='booking' and rp.pid = p.id and rp.rid = (SELECT rid FROM user_role WHERE uid = ?)",
+        sequelize.query("SELECT p.create,p.read,p.edit,p.delete,p.module from role_permissions as rp,permissions as p where p.module='booking' and rp.pid = p.id and rp.rid = (SELECT rid FROM user_role WHERE uid = ?)",
             {
                 replacements: [req.params.id]
             }).then((result) => {

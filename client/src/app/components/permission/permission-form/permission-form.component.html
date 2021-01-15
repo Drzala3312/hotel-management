@@ -21,7 +21,7 @@
                         <div class="form-group col">
                             <div class="form-row">
                                 <label for="module">Module</label>&nbsp;&nbsp;
-                                <select  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.module"  id="module">
+                                <select [ngModelOptions]="{standalone: true}" [(ngModel)]="form.module" id="module">
                                     <option>Select an option</option>
                                     <option *ngFor="let module of modules" [ngValue]="module.id">{{ module.name }}
                                     </option>
@@ -31,29 +31,33 @@
                         </div>
                         <div class="form-group col">
                             <label for="create">Create:</label>&nbsp;&nbsp;
-                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.create" id="create">
+                            <input [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.create"
+                                id="create">
                         </div>
                         <div class="form-group col">
                             <label for="read">Read:</label>&nbsp;&nbsp;
-                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.read" id="read">
+                            <input [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.read"
+                                id="read">
                         </div>
                         <div class="form-group col">
                             <label for="update">Update:</label>&nbsp;&nbsp;
-                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.update" id="update">
+                            <input [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.update"
+                                id="update">
 
                         </div>
                         <div class="col">
                             <label for="delete">Delete</label>&nbsp;&nbsp;
-                            <input  [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.delete" id="delete">
+                            <input [ngModelOptions]="{standalone: true}" type="checkbox" [(ngModel)]="form.delete"
+                                id="delete">
+                        </div>
                     </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary">Save</button> &nbsp; &nbsp;
+                    <a [routerLink]="['/permissions']" class="btn btn-primary">
+                        Cancel
+                    </a>
+                </form>
             </div>
-            <hr>
-            <button type="submit" class="btn btn-primary">Save</button> &nbsp; &nbsp;
-            <a [routerLink]="['/permissions']" class="btn btn-primary">
-                Cancel
-            </a>
-            </form>
         </div>
     </div>
-</div>
 </div>
