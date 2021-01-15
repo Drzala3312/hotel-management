@@ -28,7 +28,8 @@
                         <br>
                         <div class="form-group col">
                             <label for="permission">Permission</label>
-
+                            <angular2-multiselect [data]="availablePermissions" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="selectedPermissions" [settings]="dropdownSettings"></angular2-multiselect>
                         </div>
                     </div>
                     <hr>
