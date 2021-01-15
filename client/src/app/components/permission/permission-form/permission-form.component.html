@@ -3,7 +3,13 @@
 </h1>
 <hr>
 <div class="row grid-margin">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
+        <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+            Permission already added
+        </div>
+    </div>
+
+    <div class="col-lg-6">
         <div class="btn-group float-right">
             <a class="btn btn-success" [routerLink]="['/users']">
                 <i class="fa fa-chevron-circle-left"></i> Go Back

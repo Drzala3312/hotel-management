@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         pname: {
             type: Sequelize.STRING(50),
             allowNull: false,
+            unique: true,
             validate: {
                 notEmpty: true,
                 len: [3, 50]

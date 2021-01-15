@@ -119,7 +119,7 @@ routes.push({
             module: req.body.module,
             create: req.body.create,
             read: req.body.read,
-            edit: req.body.edit,
+            edit: req.body.update,
             delete: req.body.delete,
         };
 
@@ -138,7 +138,15 @@ routes.push({
                         errors: err.errors,
                         name: err.name,
                     });
-                } else {
+                }
+                else if(err.name === 'SequelizeUniqueConstraintError'){
+                    res.status(400);
+                    res.json({
+                        errors: err.errors,
+                        name: err.name,
+                    });
+                }
+                else {
                     res.json(err);
                 }
 
@@ -170,11 +178,11 @@ routes.push({
             edit: req.body.update,
             delete: req.body.delete,
         };
-
+        console.log(form);
         console.log(models.permission);
         // update record
         models.permission
-            .find({
+            .findOne({
                 where: {
                     id: {
                         [Sequelize.Op.eq]: req.params.id,
@@ -182,13 +190,14 @@ routes.push({
                 },
             })
             .then((data) => {
-                return data.updateAttributes(form);
+                return data.update(form);
             })
             .then((data) => {
                 res.json(data);
                 return next();
             })
             .catch((err) => {
+                console.log(err)
                 if (err.name === 'SequelizeValidationError') {
                     res.status(400);
                     res.json({

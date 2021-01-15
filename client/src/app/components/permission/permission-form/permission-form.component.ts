@@ -56,6 +56,7 @@ export class PermissionFormComponent implements OnInit {
     },
 
     ];
+    public errorMsg = false;
     constructor(
         private pc: PermissionController,
         private route: ActivatedRoute,
@@ -112,8 +113,11 @@ export class PermissionFormComponent implements OnInit {
                     payload: data
                 });
 
-                this._router.navigate(['/permission/view', data.id]);
+                this._router.navigate(['/permissions']);
             }, (error: any) => {
+                if(error.error.name === 'SequelizeUniqueConstraintError'){
+                        this.errorMsg = true;
+                }
                 this._store.dispatch({
                     type: PermissionTypes.CREATE_PERMISSION_FAILURE,
                     error: error.error
@@ -132,7 +136,7 @@ export class PermissionFormComponent implements OnInit {
                     payload: data
                 });
 
-                this._router.navigate(['/permission']);
+                this._router.navigate(['/permissions']);
             }, (error: any) => {
                 this._store.dispatch({
                     type: PermissionTypes.UPDATE_PERMISSION_FAILURE,
@@ -151,7 +155,7 @@ export class PermissionFormComponent implements OnInit {
             name += "R";
         }
         if (form.update) {
-            name += "E";
+            name += "U";
         }
         if (form.delete) {
             name += "D";
