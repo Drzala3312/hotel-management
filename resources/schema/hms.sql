@@ -200,10 +200,10 @@ ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `hms`.`role`
+-- Table `hms`.`roles`
 -- -----------------------------------------------------
 
-CREATE TABLE `role` (
+CREATE TABLE `roles` (
   `rid` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`rid`)

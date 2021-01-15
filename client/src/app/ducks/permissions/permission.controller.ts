@@ -46,6 +46,7 @@ export class PermissionController {
      * @return  {[type]} [description]
      */
     public createPermission(permission: any) {
+        console.log(permission);
         return this.http.post(environment.api_url + '/permission', permission);
     }
 
