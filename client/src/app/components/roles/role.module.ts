@@ -10,6 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 import { RoleRoutingModule } from './role-routing.module';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 import { RoleDetailComponent } from '../roles/role-detail/role-detail.component';
 import { RoleFormComponent } from '../roles/role-form/role-form.component';
@@ -31,6 +32,7 @@ import { RoleListComponent } from '../roles/role-list/role-list.component';
     FormsModule,
     ReactiveFormsModule,
     LoadingSpinnerModule,
+    AngularMultiSelectModule,
   ]
 })
 export class RoleModule { }
