@@ -22,6 +22,7 @@ import { authReducer,
     roomsReducer,
     usersReducer,
     permissionReducer,
+    roleReducer,
  } from './ducks/index';
 
 // set default environment
@@ -50,6 +51,7 @@ import { RoomsController } from './ducks/rooms/rooms.controller';
 import { UsersController } from './ducks/users/users.controller';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { PermissionController } from './ducks/permissions/permission.controller';
+import {RoleController} from './ducks/roles/role.controller';
 
 
 // Application wide providers
@@ -65,6 +67,7 @@ const APP_PROVIDERS = [
     RoomsController,
     UsersController,
     PermissionController,
+    RoleController,
 ];
 
 export function logger(reducer) {

@@ -171,7 +171,7 @@ routes.push({
             delete: req.body.delete,
         };
 
-        console.log(models.permission);
+        console.log(models.permission.find);
         // update record
         models.permission
             .find({

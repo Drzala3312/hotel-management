@@ -7,9 +7,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 import { RoleRoutingModule } from './role-routing.module';
+
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RoleRoutingModule } from './role-routing.module';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     LoadingSpinnerModule,
   ]
 })

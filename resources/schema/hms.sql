@@ -215,7 +215,7 @@ CREATE TABLE `role` (
 CREATE TABLE `permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(45) DEFAULT NULL,
-  `pname` varchar(255) DEFAULT NULL,
+  `pname` varchar(255) DEFAULT NULL, UNIQUE,
   `create` char(1) DEFAULT NULL,
   `read` char(1) DEFAULT NULL,
   `edit` char(1) DEFAULT NULL,
