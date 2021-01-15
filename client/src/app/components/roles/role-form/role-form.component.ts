@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { RoleController } from '../../../ducks/roles/role.controller';
 import { PermissionController } from '../../../ducks/permissions/permission.controller';
 import _ from 'lodash';
@@ -61,12 +61,13 @@ export class RoleFormComponent implements OnInit {
 
   }
 
-
   onItemSelect(item: any) {
     console.log(item);
   }
   onSelectAll(items: any) {
     console.log(items);
   }
+  onSubmit(item: any){
 
+  }
 }
