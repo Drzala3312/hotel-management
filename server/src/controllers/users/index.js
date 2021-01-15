@@ -3,6 +3,7 @@
 const Sequelize = require('sequelize');
 const models = require('../../models');
 const passwordHash = require('password-hash');
+const { sequelize } = require('../../models');	
 const routes = [];
 
 /**
@@ -311,5 +312,34 @@ routes.push({
 //             });
 //     }
 // });
+
+/**
+ * @action userCount
+ * @method get
+ * @param id
+ **/
+
+routes.push({
+    meta: {
+        name: 'userCount',
+        method: 'GET',
+        paths: [
+            '/userCount'
+        ]
+    },
+    middleware: (req, res, next) => {
+
+        sequelize.query("select count(*) as total from users")
+        .then((result) => {
+                res.send(200, result);
+                return next();
+            }).catch((err) => {
+                console.log(err);
+                res.status(404);
+                return next();
+            });
+    }
+});
+
 
 module.exports = routes;

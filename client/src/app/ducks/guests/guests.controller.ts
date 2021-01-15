@@ -32,4 +32,8 @@ export class GuestsController {
     public getPermission(userId: number): Observable<any> {
         return this.http.get<any>(environment.api_url + '/guestPermission/' + userId);
     }
+
+    public getGuestCounts(): Observable<any> {
+        return this.http.get<any>(environment.api_url + '/guestCount');
+    }
 }

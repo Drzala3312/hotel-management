@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    name: 'Ruals',
+    name: 'HMS',
     api_url: 'http://localhost:1337' // 'http://[::]:1337'
 };

@@ -36,4 +36,8 @@ export class RoomsController {
     public getPermission(userId: number): Observable<any> {
         return this.http.get<any>(environment.api_url + '/roomPermission/' + userId);
     }
+
+    public getRoomCounts(): Observable<any> {
+        return this.http.get<any>(environment.api_url + '/roomCount');
+    }
 }

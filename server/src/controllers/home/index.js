@@ -69,8 +69,10 @@ routes.push({
                 attributes: [
                     ['id', 'uid'],
                     'username',
-                    'password',
-                    'type'
+                    'type',
+                    'name',
+                    'lastname',
+                    'password'
                 ],
                 limit: 1
             }).then((user) => {
