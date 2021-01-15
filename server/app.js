@@ -180,7 +180,8 @@ const setupMiddleware = (middlewareName) => {
     'cancellations',
     'services',
     'permissions',
-    'role_permissions'
+    'role_permissions',
+    'roles'
 ].forEach(setupMiddleware);
 
 /**
