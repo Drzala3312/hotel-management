@@ -69,4 +69,8 @@ export class UsersController {
         return this.http.delete(environment.api_url + '/user/' + userId)
         .subscribe(()=> console.log("DELETED"));
     }
+
+    public getUserCounts(): Observable<any> {
+        return this.http.get<any>(environment.api_url + '/userCount');
+    }
 }

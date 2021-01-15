@@ -529,4 +529,33 @@ routes.push({
     }
 });
 
+/**
+ * @action bookingCount
+ * @method get
+ * @param id
+ **/
+
+routes.push({
+    meta: {
+        name: 'bookingCount',
+        method: 'GET',
+        paths: [
+            '/bookingCount'
+        ]
+    },
+    middleware: (req, res, next) => {
+
+        sequelize.query("select count(*) as total from bookings")
+        .then((result) => {
+                res.send(200, result);
+                return next();
+            }).catch((err) => {
+                console.log(err);
+                res.status(404);
+                return next();
+            });
+    }
+});
+
+
 module.exports = routes;

@@ -15,6 +15,10 @@ export class AppLayoutComponent implements OnInit {
     public openSidebar = false;
     public openNotifications = false;
     public userType;
+
+    public username;
+    public firstname;
+    public lastname;
   constructor(
     public _appState: AppState,
     private _titleService: Title,
@@ -28,6 +32,9 @@ export class AppLayoutComponent implements OnInit {
     {
         token = this._authenticationService.decode();
         this.userType = token.user.type;
+        this.username = token.user.username;
+        this.firstname = token.user.name;
+        this.lastname = token.user.lastname;
     }
 
     this.name = environment.name;
@@ -43,7 +50,8 @@ export class AppLayoutComponent implements OnInit {
         e.preventDefault();
         this.openSidebar = false;
         this._authenticationService.removeToken();
-        this._router.navigate(['/']);
+        location.reload();
+        //this._router.navigate(['/']);
     }
 
 }

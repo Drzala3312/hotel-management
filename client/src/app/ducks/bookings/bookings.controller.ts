@@ -67,4 +67,8 @@ export class BookingsController {
     public getPermission(userId: number): Observable<any> {
         return this.http.get<any>(environment.api_url + '/bookingPermission/' + userId);
     }
+
+    public getBookingCounts(): Observable<any> {
+        return this.http.get<any>(environment.api_url + '/bookingCount');
+    }
 }

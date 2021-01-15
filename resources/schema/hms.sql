@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `hms`.`users` (
   `lastname` VARCHAR(50) NOT NULL,
   `username` VARCHAR(20) NOT NULL unique,
   `password` VARCHAR(100) NOT NULL,
-  `type` ENUM('admin', 'user') NOT NULL,
+  `type` ENUM('admin', 'user','manager') NOT NULL,
   `active` TINYINT NOT NULL DEFAULT 0,
    `phone` VARCHAR(30) NULL,
   `mobile` VARCHAR(30) NULL,
