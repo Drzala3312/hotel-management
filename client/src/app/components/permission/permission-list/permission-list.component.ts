@@ -10,7 +10,7 @@ import { PermissionController } from '../../../ducks/permissions/permission.cont
   styleUrls: ['./permission-list.component.css']
 })
 export class PermissionListComponent implements OnInit {
-    displayColumns: string[] = ['detail','name', 'module', 'create', 'read','update','delete', 'action'];
+    displayColumns: string[] = ['detail','name', 'module', 'create', 'read','edit','delete', 'action'];
     dataSource = new MatTableDataSource();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -20,6 +20,16 @@ export class PermissionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.pc.getPermissions().subscribe((permission) => {
+        this.isNoData = permission ? (permission.length === 0 ? true : false) : false;
+        if (permission.length > 0) {
+            this.dataSource = new MatTableDataSource(permission);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+        }
+    }, (error: any) => {
+        console.log(error);
+    })
   }
 
   applyFilter(event: Event) {

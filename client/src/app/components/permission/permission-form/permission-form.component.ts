@@ -62,7 +62,7 @@ export class PermissionFormComponent implements OnInit {
         private _router: Router,
         private _store: Store<any>,
     ) {
-        _store.select('permissions').subscribe((response) => {
+        _store.select('permission').subscribe((response) => {
             this.permission$ = response;
         });
     }
@@ -77,47 +77,47 @@ export class PermissionFormComponent implements OnInit {
         e.preventDefault();
         console.log(this.form);
         this.form.pname = this.createPermisionName(this.form);
-        // if (isNaN(this.id)) {
-        //     // dispatch create
-        //     this._store.dispatch({
-        //         type: PermissionTypes.CREATE_PERMISSION
-        //     });
+        if (isNaN(this.id)) {
+            // dispatch create
+            this._store.dispatch({
+                type: PermissionTypes.CREATE_PERMISSION
+            });
 
-        //     // request create permission
-        //     this.pc.createPermission(this.form).subscribe((data: any) => {
-        //         this._store.dispatch({
-        //             type: PermissionTypes.CREATE_PERMISSION_SUCCESS,
-        //             payload: data
-        //         });
+            // request create permission
+            this.pc.createPermission(this.form).subscribe((data: any) => {
+                this._store.dispatch({
+                    type: PermissionTypes.CREATE_PERMISSION_SUCCESS,
+                    payload: data
+                });
 
-        //         this._router.navigate(['/permission/view', data.id]);
-        //     }, (error: any) => {
-        //         this._store.dispatch({
-        //             type: PermissionTypes.CREATE_PERMISSION_FAILURE,
-        //             error: error.error
-        //         });
-        //     });
-        // } else {
-        //     // dispatch update
-        //     this._store.dispatch({
-        //         type: PermissionTypes.UPDATE_PERMISSION
-        //     });
+                this._router.navigate(['/permission/view', data.id]);
+            }, (error: any) => {
+                this._store.dispatch({
+                    type: PermissionTypes.CREATE_PERMISSION_FAILURE,
+                    error: error.error
+                });
+            });
+        } else {
+            // dispatch update
+            this._store.dispatch({
+                type: PermissionTypes.UPDATE_PERMISSION
+            });
 
-        //     // request create permission
-        //     this.pc.updatePermission(this.id, this.form).subscribe((data: any) => {
-        //         this._store.dispatch({
-        //             type: PermissionTypes.UPDATE_PERMISSION_SUCCESS,
-        //             payload: data
-        //         });
+            // request create permission
+            this.pc.updatePermission(this.id, this.form).subscribe((data: any) => {
+                this._store.dispatch({
+                    type: PermissionTypes.UPDATE_PERMISSION_SUCCESS,
+                    payload: data
+                });
 
-        //         this._router.navigate(['/permission/view', data.id]);
-        //     }, (error: any) => {
-        //         this._store.dispatch({
-        //             type: PermissionTypes.UPDATE_PERMISSION_FAILURE,
-        //             error: error.error
-        //         });
-        //     });
-        // }
+                this._router.navigate(['/permission/view', data.id]);
+            }, (error: any) => {
+                this._store.dispatch({
+                    type: PermissionTypes.UPDATE_PERMISSION_FAILURE,
+                    error: error.error
+                });
+            });
+        }
     }
 
     createPermisionName(form){

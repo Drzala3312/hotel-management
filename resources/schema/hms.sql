@@ -210,16 +210,17 @@ CREATE TABLE `role` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
--- Table `hms`.`permission`
+-- Table `hms`.`permissions`
 -- -----------------------------------------------------
-CREATE TABLE `permission` (
-  `pid` int(11) NOT NULL,
+CREATE TABLE `permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(45) DEFAULT NULL,
+  `pname` varchar(255) DEFAULT NULL,
   `create` char(1) DEFAULT NULL,
   `read` char(1) DEFAULT NULL,
   `edit` char(1) DEFAULT NULL,
   `delete` char(1) DEFAULT NULL,
-  PRIMARY KEY (`pid`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------

@@ -24,44 +24,44 @@ export class PermissionController {
      * @return  {Observable<any>} [description]
      */
     public getPermissions(): Observable<any> {
-        return this.http.get<any>(environment.api_url + '/user');
+        return this.http.get<any>(environment.api_url + '/permission');
     }
 
     /**
      * [getPermissionById description]
      * @method  getPermissionById
      * @version [version]
-     * @param   {number} userId [description]
+     * @param   {number} permissionId [description]
      * @return  {Observable<any>} [description]
      */
-    public getPermissionById(userId: number): Observable<any> {
-        return this.http.get<any>(environment.api_url + '/user/' + userId);
+    public getPermissionById(permissionId: number): Observable<any> {
+        return this.http.get<any>(environment.api_url + '/permission/' + permissionId);
     }
 
     /**
      * [createPermission description]
      * @method  createPermission
      * @version [version]
-     * @param   {any} user [description]
+     * @param   {any} permission [description]
      * @return  {[type]} [description]
      */
-    public createPermission(user: any) {
-        return this.http.post(environment.api_url + '/user', user);
+    public createPermission(permission: any) {
+        return this.http.post(environment.api_url + '/permission', permission);
     }
 
     /**
      * [updatePermission description]
      * @method  updatePermission
      * @version [version]
-     * @param   {number} userId [description]
-     * @param   {any} user [description]
+     * @param   {number} permissionId [description]
+     * @param   {any} permission [description]
      * @return  {Observable<any>} [description]
      */
-    public updatePermission(userId: number, user: any): Observable<any> {
-        return this.http.put<any>(environment.api_url + '/user/' + userId, user);
+    public updatePermission(permissionId: number, permission: any): Observable<any> {
+        return this.http.put<any>(environment.api_url + '/permission/' + permissionId, permission);
     }
-    public deletePermission(userId: number){
-        return this.http.delete(environment.api_url + '/user/' + userId)
+    public deletePermission(permissionId: number){
+        return this.http.delete(environment.api_url + '/permission/' + permissionId)
         .subscribe(()=> console.log("DELETED"));
     }
 }
