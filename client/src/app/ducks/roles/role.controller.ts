@@ -24,7 +24,7 @@ export class RoleController {
      * @return  {Observable<any>} [description]
      */
     public getroles(): Observable<any> {
-        return this.http.get<any>(environment.api_url + '/role');
+        return this.http.get<any>(environment.api_url + '/roles');
     }
 
     /**
@@ -35,7 +35,7 @@ export class RoleController {
      * @return  {Observable<any>} [description]
      */
     public getroleById(roleId: number): Observable<any> {
-        return this.http.get<any>(environment.api_url + '/role/' + roleId);
+        return this.http.get<any>(environment.api_url + '/roles/' + roleId);
     }
 
     /**
@@ -46,7 +46,7 @@ export class RoleController {
      * @return  {[type]} [description]
      */
     public createrole(role: any) {
-        return this.http.post(environment.api_url + '/role', role);
+        return this.http.post(environment.api_url + '/roles', role);
     }
 
     /**
@@ -58,10 +58,10 @@ export class RoleController {
      * @return  {Observable<any>} [description]
      */
     public updaterole(roleId: number, role: any): Observable<any> {
-        return this.http.put<any>(environment.api_url + '/role/' + roleId, role);
+        return this.http.put<any>(environment.api_url + '/roles/' + roleId, role);
     }
     public deleterole(roleId: number){
-        return this.http.delete(environment.api_url + '/role/' + roleId)
+        return this.http.delete(environment.api_url + '/roles/' + roleId)
         .subscribe(()=> console.log("DELETED"));
     }
 }
