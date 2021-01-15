@@ -68,6 +68,28 @@ export class PermissionFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = Number(params['id']);
+
+            if (!isNaN(this.id)) {
+                this.isCreate = false
+                this.pc.getPermissionById(this.id).subscribe((data: any) => {
+                    this.form = {
+                        pname: data.pname,
+                        module: data.module,
+                        create: data.create,
+                        update: data.edit,
+                        read: data.read,
+                        delete: data.delete,
+
+                    };
+
+
+                }, (error: any) => {
+                    console.error(error);
+                });
+            }
+        });
     }
     public ngOnDestroy() {
         this.sub.unsubscribe();
@@ -75,7 +97,7 @@ export class PermissionFormComponent implements OnInit {
 
     public onSubmit(e: MouseEvent) {
         e.preventDefault();
-        console.log(this.form);
+
         this.form.pname = this.createPermisionName(this.form);
         if (isNaN(this.id)) {
             // dispatch create
@@ -110,7 +132,7 @@ export class PermissionFormComponent implements OnInit {
                     payload: data
                 });
 
-                this._router.navigate(['/permission/view', data.id]);
+                this._router.navigate(['/permission']);
             }, (error: any) => {
                 this._store.dispatch({
                     type: PermissionTypes.UPDATE_PERMISSION_FAILURE,
@@ -120,21 +142,21 @@ export class PermissionFormComponent implements OnInit {
         }
     }
 
-    createPermisionName(form){
-        var name = form.module+" (";
-        if(form.create){
-            name+= "C";
+    createPermisionName(form) {
+        var name = form.module + " (";
+        if (form.create) {
+            name += "C";
         }
-        if(form.read){
-            name+= "R";
+        if (form.read) {
+            name += "R";
         }
-        if(form.update){
-            name+= "U";
+        if (form.update) {
+            name += "E";
         }
-        if(form.delete){
-            name+= "D";
+        if (form.delete) {
+            name += "D";
         }
-        name+=')';
+        name += ')';
         return name;
     }
 
