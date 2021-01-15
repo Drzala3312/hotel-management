@@ -90,7 +90,7 @@ routes.push({
     meta: {
         name: 'rolesDelete',
         method: 'DEL',
-        paths: ['/rolePermissions'],
+        paths: ['/roles'],
     },
     middleware: (req, res, next) => {
         models.role_permissions
