@@ -59,18 +59,16 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         type: {
-            type: Sequelize.ENUM(),
-            values: ['admin','manager', 'user'],
+            type: Sequelize.INTEGER,
+
             allowNull: false,
-            defaultValue: 'user',
-            validate: {
-                isIn: [['admin','manager','user']],
-            },
-            set(val) {
-                if (val) {
-                    this.setDataValue('type', val.toLowerCase());
-                }
-            }
+            defaultValue: 2,
+
+            // set(val) {
+            //     if (val) {
+            //         this.setDataValue('type', val.toLowerCase());
+            //     }
+            // }
         },
         active: {
             type: Sequelize.BOOLEAN,

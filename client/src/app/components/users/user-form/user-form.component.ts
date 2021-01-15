@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { RoleController } from '../../../ducks/roles/role.controller';
 import { UsersController } from '../../../ducks/users/users.controller';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-user-form',
@@ -12,7 +14,7 @@ export class UserFormComponent implements OnInit {
     public id: number;
     public sub: any;
     isCreate = true;
-
+    public roles:any[];
     public genders: any[] = [{
         id: 'M',
         name: 'Male'
@@ -44,14 +46,33 @@ export class UserFormComponent implements OnInit {
         password:'',
         active:0
     };
+    isNoData = false;
   constructor(
       private userController: UsersController,
+      private rc: RoleController,
       private _store: Store<any>,
       private route: ActivatedRoute,
       private router: Router
       ) { }
 
   ngOnInit(): void {
+
+
+    this.rc.getroles().subscribe((role) => {
+        this.isNoData = role ? (role.length === 0 ? true : false) : false;
+        if (role.length > 0) {
+
+            this.roles = _.map(role, (item) => {
+                return {
+                    id: item.rid,
+                    itemName: item.name
+                };
+            });
+          console.log(this.roles);
+        }
+    }, (error: any) => {
+        console.log(error);
+    })
     this.sub = this.route.params.subscribe(params => {
         this.id = Number(params['id']);
 

@@ -40,7 +40,11 @@
                         </div>
                         <div class="form-group col">
                             <label for="role">Role</label>
-                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.type" class="form-control" id="type" aria-describedby="role_help" placeholder="role" autocomplete="off">
+                            <select [ngModelOptions]="{standalone: true}" [(ngModel)]="form.type" class="form-control" id="gender" aria-describedby="gender_help">
+                                <option>Select an option</option>
+                                <option *ngFor="let role of roles" [ngValue]="role.id">{{ role.itemName }}</option>
+                            </select>
+                            <!-- <input [ngModelOptions]="{standalone: true}" [(ngModel)]="form.type" class="form-control" id="type" aria-describedby="role_help" placeholder="role" autocomplete="off"> -->
                             <small id="role_help " class="form-text text-muted text-success">type help (roles are admin,user,manager)</small>
                         </div>
                     </div>

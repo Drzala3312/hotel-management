@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const models = require('../../models');
 const passwordHash = require('password-hash');
-const { sequelize } = require('../../models');	
+const { sequelize } = require('../../models');
 const routes = [];
 
 /**
@@ -218,9 +218,12 @@ routes.push({
             gender: req.body.gender ? req.body.gender : null,
         };
 
+        console.log(form);
+        console.log(models.permission);
+
         // update record
         models.users
-            .find({
+            .findOne({
                 where: {
                     id: {
                         [Sequelize.Op.eq]: req.params.id,
