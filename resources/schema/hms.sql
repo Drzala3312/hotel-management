@@ -204,7 +204,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 
 CREATE TABLE `roles` (
-  `rid` int(11) NOT NULL,
+  `rid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`rid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

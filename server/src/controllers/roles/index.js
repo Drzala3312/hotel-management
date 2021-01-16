@@ -52,9 +52,8 @@ routes.push({
     middleware: (req, res, next) => {
         // object
         const form = {
-            rid: req.body.rid,
-            name: req.body.name,
-            permissions: req.body.permissions ? req.body.permissions : null,
+            name: req.body.rolename,
+            permissions: req.body.permission ? req.body.permission : null,
         };
 
         // create record
@@ -62,58 +61,6 @@ routes.push({
             .create(form)
             .then((data) => {
                 res.json(data);
-                if (data.length > 0) {
-
-                    // open transaction
-                    return models.sequelize
-                        .transaction((t) => {
-                            // create booking
-                            return models.roles.create(form).then((data) => {
-                                // map rooms and create one by one
-                                return Promise.map(form.permissions, (pid) => {
-                                    return models.sequelize.query(
-                                        'INSERT INTO role_permission (rid, pid) VALUES (:rid, :pid)',
-                                        {
-                                            transaction: t,
-                                            replacements: {
-                                                rid: data.id,
-                                                pid: pid,
-                                            },
-                                            type: Sequelize.QueryTypes.INSERT,
-                                        }
-                                    );
-                                }).then(() => {
-                                    return data;
-                                });
-                            });
-                        })
-                        .then((data) => {
-                            res.json(data);
-                            return next();
-                        })
-                        .catch((err) => {
-                            res.status(400);
-                            if (err.name === 'SequelizeValidationError') {
-                                res.json({
-                                    errors: err.errors,
-                                    name: err.name,
-                                });
-                            } else {
-                                res.json({
-                                    errors: [
-                                        {
-                                            message: err.message,
-                                        },
-                                    ],
-                                });
-                            }
-
-                            return next();
-                        });
-                } else {
-                    throw Error('Select at least one room');
-                }
-
                 return next();
             })
             .catch((err) => {
@@ -136,9 +83,9 @@ routes.push({
 
 routes.push({
     meta: {
-        name: 'permissionUpdate',
+        name: 'rolesUpdate',
         method: 'PUT',
-        paths: ['/permission/:id'],
+        paths: ['/roles/:id'],
     },
     middleware: (req, res, next) => {
         const id = req.params.id;
@@ -161,47 +108,7 @@ routes.push({
                 },
             })
             .then((data) => {
-                return data.update(form).then((updated) => {
-                    return models.sequelize.query('DELETE FROM role_permission WHERE rid = :rid', {
-                        transaction: t,
-                        replacements: {
-                            booking_id: updated.id
-                        },
-                        type: Sequelize.QueryTypes.DELETE
-                    }).then(() => {
-                        // map pid and create one by one
-                        return Promise.map(form.permissions, (pid) => {
-                            return models.sequelize.query('INSERT INTO role_permission (rid, pid) VALUES (:rid, :pid)', {
-                                transaction: t,
-                                replacements: {
-                                    rid: data.id,
-                                    pid: pid,
-                                },
-                                type: Sequelize.QueryTypes.INSERT
-                            });
-                        }).then(() => {
-                            return updated;
-                        });
-                    });
-                });
-            })
-            .then((data) => {
-                res.json(data);
-                return next();
-            })
-            .catch((err) => {
-                console.log(err)
-                if (err.name === 'SequelizeValidationError') {
-                    res.status(400);
-                    res.json({
-                        errors: err.errors,
-                        name: err.name,
-                    });
-                } else {
-                    res.json(err);
-                }
-
-                return next();
+                return data.update(form);
             });
     },
 });

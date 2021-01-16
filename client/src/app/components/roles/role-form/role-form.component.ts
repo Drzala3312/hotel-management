@@ -53,19 +53,25 @@ export class RoleFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.dropdownSettings={
-    //     singleSelection: false,
-    //     idField: 'item_id',
-    //     textField: 'item_text',
-    //     selectAllText: 'Select All',
-    //     unSelectAllText: 'UnSelect All',
-    //     itemsShowLimit: 3,
-    //     allowSearchFilter: true
-    //   };
-
-
   }
   onSubmit(item: any) {
+      var permissionIds = [];
     console.log(this.selectedPermissions);
+    for(var i =0;i< this.selectedPermissions.length;i++){
+        permissionIds.push(this.selectedPermissions[i].id);
+    }
+    this.form.permission = permissionIds;
+    if (isNaN(this.id)){
+         // request create permission
+         this.rc.createrole(this.form).subscribe((data: any) => {
+             console.log("roles create successfully")
+             for(var i =0;i< this.selectedPermissions.length;i++){
+               this.rc.createRolePermission({rid:data.rid,pid:this.selectedPermissions[i].id});
+            }
+          //  this._router.navigate(['/roles']);
+        }, (error: any) => {
+           console.error(error);
+        });
+    }
   }
 }

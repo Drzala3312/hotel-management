@@ -49,6 +49,16 @@ export class RoleController {
         return this.http.post(environment.api_url + '/roles', role);
     }
 
+    createRolePermission(role: any) {
+        return this.http.post(environment.api_url + '/rolePermissions', role);
+    }
+
+    // public deleterolePermission(role: any){
+    //     return this.http.delete(environment.api_url + '/rolePermissions/' + role)
+    //     .subscribe(()=> console.log("DELETED"));
+    // }
+
+
     /**
      * [updaterole description]
      * @method  updaterole
