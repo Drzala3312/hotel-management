@@ -79,6 +79,7 @@ export class UserFormComponent implements OnInit {
         if (!isNaN(this.id)) {
             this.isCreate = false
             this.userController.getUserById(this.id).subscribe((data: any) => {
+                data = data[0];
                 this.form = {
                     username: data.userName,
                     name: data.name,
@@ -95,6 +96,7 @@ export class UserFormComponent implements OnInit {
                     active: data.active,
                 };
 
+                console.log(this.form)
 
             }, (error: any) => {
                 console.error(error);
@@ -111,15 +113,12 @@ export class UserFormComponent implements OnInit {
 
             // request create user
             this.userController.createUser(this.form).subscribe((data: any) => {
-
-
+                console.log(data);
                 this.router.navigate(['/users/view', data.id]);
             }, (error: any) => {
                console.error(error);
             });
         } else {
-
-
             // request create user
             this.userController.updateUser(this.id, this.form).subscribe((data: any) => {
 

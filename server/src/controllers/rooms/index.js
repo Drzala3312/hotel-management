@@ -2,7 +2,7 @@
 
 const Sequelize = require('sequelize');
 const models = require('../../models');
-const { sequelize } = require('../../models');	
+const { sequelize } = require('../../models');
 const routes = [];
 
 /**
@@ -230,8 +230,8 @@ routes.push({
                     [Sequelize.Op.eq]: req.params.id
                 }
             }
-        }).then((result) =>{
-            res.send(200,{"deleted": result});
+        }).then((result) => {
+            res.send(200, { "deleted": result });
             return next();
         }).catch((err) => {
             console.log(err);
@@ -289,7 +289,7 @@ routes.push({
     middleware: (req, res, next) => {
 
         sequelize.query("select count(*) as total from rooms")
-        .then((result) => {
+            .then((result) => {
                 res.send(200, result);
                 return next();
             }).catch((err) => {

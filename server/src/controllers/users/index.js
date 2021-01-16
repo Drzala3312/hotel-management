@@ -18,55 +18,65 @@ routes.push({
         paths: ['/user'],
     },
     middleware: (req, res, next) => {
-        models.users
-            .findAll({
-                order: [['id', 'DESC']],
-                attributes: [
-                    'id',
-                    'created_at',
-                    'username',
-                    'name',
-                    'lastname',
-                    'type',
-                    'active',
-                    'email',
-                    'phone',
-                    'mobile',
-                    'city',
-                    'country',
-                    'organization',
-                    'age',
-                    'gender',
-                ],
-            })
-            .then((data) => {
-                const resObj = data.map((user) => {
-                    // tidy up the user data
-                    return Object.assign(
-                        {},
-                        {
-                            uid: user.id,
-                            created_at: user.created_at,
-                            userName: user.username,
-                            lastname: user.lastname,
-                            name: user.name,
-                            type: user.type,
-                            active: user.active,
-                            phone: user.phone,
-                            mobile: user.mobile,
-                            city: user.city,
-                            country: user.country,
-                            email: user.email,
-                            organization: user.organization,
-                            age: user.age,
-                            gender: user.gender,
-                        }
-                    );
-                });
 
-                res.json(resObj);
-                return next();
-            });
+        sequelize.query("SELECT u.id as uid,u.created_at,u.name,r.name as type,u.lastname,u.username as userName,u.email,u.gender,u.age,u.organization,u.city,u.country,u.phone,u.mobile,u.active from users as u,user_role as ur,roles as r where u.id = ur.uid and ur.rid = r.rid")
+        .then((result) => {
+            res.send(200, result[0]);
+            return next();
+        }).catch((err) => {
+            console.log(err);
+            res.status(404);
+            return next();
+        });
+
+        // models.users
+        //     .findAll({
+        //         order: [['id', 'DESC']],
+        //         attributes: [
+        //             'id',
+        //             'created_at',
+        //             'username',
+        //             'name',
+        //             'lastname',
+        //             'type',
+        //             'active',
+        //             'email',
+        //             'phone',
+        //             'mobile',
+        //             'city',
+        //             'country',
+        //             'organization',
+        //             'age',
+        //             'gender',
+        //         ],
+        //     })
+        //     .then((data) => {
+        //         const resObj = data.map((user) => {
+        //             // tidy up the user data
+        //             return Object.assign(
+        //                 {},
+        //                 {
+        //                     uid: user.id,
+        //                     created_at: user.created_at,
+        //                     userName: user.username,
+        //                     lastname: user.lastname,
+        //                     name: user.name,
+        //                     type: user.type,
+        //                     active: user.active,
+        //                     phone: user.phone,
+        //                     mobile: user.mobile,
+        //                     city: user.city,
+        //                     country: user.country,
+        //                     email: user.email,
+        //                     organization: user.organization,
+        //                     age: user.age,
+        //                     gender: user.gender,
+        //                 }
+        //             );
+        //         });
+        //         res.json(resObj);
+        //         return next();
+        //     });
     },
 });
 
@@ -83,55 +93,69 @@ routes.push({
         paths: ['/user/:id'],
     },
     middleware: (req, res, next) => {
-        models.users
-            .findOne({
-                where: {
-                    id: {
-                        [Sequelize.Op.eq]: req.params.id,
-                    },
-                },
-                attributes: [
-                    'id',
-                    'created_at',
-                    'username',
-                    'name',
-                    'lastname',
-                    'type',
-                    'active',
-                    'email',
-                    'phone',
-                    'mobile',
-                    'city',
-                    'country',
-                    'organization',
-                    'age',
-                    'gender',
-                ],
-                limit: 1,
-                raw: true,
-            })
-            .then((data) => {
-                const resObj = {
-                    uid: data.id,
-                    created_at: data.created_at,
-                    userName: data.username,
-                    lastname: data.lastname,
-                    name: data.name,
-                    type: data.type,
-                    active: data.active,
-                    phone: data.phone,
-                    mobile: data.mobile,
-                    city: data.city,
-                    country: data.country,
-                    email: data.email,
-                    organization: data.organization,
-                    age: data.age,
-                    gender: data.gender,
-                };
 
-                res.json(resObj);
-                return next();
-            });
+        sequelize.query("SELECT u.id as uid,u.created_at,u.name,r.rid as type,u.lastname,u.username as userName,u.email,u.gender,u.age,u.organization,u.city,u.country,u.phone,u.mobile,u.active from users as u,user_role as ur,roles as r where u.id = ? and u.id = ur.uid and ur.rid = r.rid",
+        {
+            replacements: [req.params.id]
+        })
+        .then((result) => {
+            res.send(200, result[0]);
+            return next();
+        }).catch((err) => {
+            console.log(err);
+            res.status(404);
+            return next();
+        });
+
+        // models.users
+        //     .findOne({
+        //         where: {
+        //             id: {
+        //                 [Sequelize.Op.eq]: req.params.id,
+        //             },
+        //         },
+        //         attributes: [
+        //             'id',
+        //             'created_at',
+        //             'username',
+        //             'name',
+        //             'lastname',
+        //             'type',
+        //             'active',
+        //             'email',
+        //             'phone',
+        //             'mobile',
+        //             'city',
+        //             'country',
+        //             'organization',
+        //             'age',
+        //             'gender',
+        //         ],
+        //         limit: 1,
+        //         raw: true,
+        //     })
+        //     .then((data) => {
+        //         const resObj = {
+        //             uid: data.id,
+        //             created_at: data.created_at,
+        //             userName: data.username,
+        //             lastname: data.lastname,
+        //             name: data.name,
+        //             type: data.type,
+        //             active: data.active,
+        //             phone: data.phone,
+        //             mobile: data.mobile,
+        //             city: data.city,
+        //             country: data.country,
+        //             email: data.email,
+        //             organization: data.organization,
+        //             age: data.age,
+        //             gender: data.gender,
+        //         };
+
+        //         res.json(resObj);
+        //         return next();
+        //     });
     },
 });
 
@@ -154,7 +178,7 @@ routes.push({
             username: req.body.username,
             active: req.body.active,
             password: passwordHash.generate(req.body.password),
-            type: req.body.type,
+            //type: req.body.type,
             phone: req.body.phone ? req.body.phone : null,
             mobile: req.body.mobile ? req.body.mobile : null,
             city: req.body.city,
@@ -165,26 +189,31 @@ routes.push({
             gender: req.body.gender ? req.body.gender : null,
         };
 
-        // create record
-        models.users
-            .create(form)
-            .then((data) => {
-                res.json(data);
+        models.sequelize.transaction((t) => {
+            // create booking
+            var id;
+            return models.users.create(form).then((data) => {
+                id = data.dataValues.id;
+                console.log(req.body.type);
+                return models.sequelize.query('INSERT INTO user_role (uid, rid) VALUES (:uid, :rid)', {
+                    transaction: t,
+                    replacements: {
+                        uid: data.dataValues.id,
+                        rid: req.body.type
+                    },
+                    type: Sequelize.QueryTypes.INSERT
+                })
+            }).then((data) => {
+                //return data;
+                //res.send(200, data);
+                res.json({id:id});
                 return next();
-            })
-            .catch((err) => {
-                if (err.name === 'SequelizeValidationError') {
-                    res.status(400);
-                    res.json({
-                        errors: err.errors,
-                        name: err.name,
-                    });
-                } else {
-                    res.json(err);
-                }
-
+            }).catch((err) => {
+                console.log(err);
+                res.json(err);
                 return next();
             });
+        })
     },
 });
 
@@ -333,7 +362,7 @@ routes.push({
     middleware: (req, res, next) => {
 
         sequelize.query("select count(*) as total from users")
-        .then((result) => {
+            .then((result) => {
                 res.send(200, result);
                 return next();
             }).catch((err) => {
