@@ -243,7 +243,6 @@ export class BookingsFormComponent implements OnInit, OnDestroy {
             this._store.dispatch({
                 type: BookingTypes.UPDATE_BOOKINGS
             });
-
             // request update booking
             this._bookings.updateBooking(this.id, this.form).subscribe((data: any) => {
                 this._store.dispatch({

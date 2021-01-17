@@ -18,14 +18,12 @@ export class BookingsListComponent implements OnInit {
     constructor(private _bookings: BookingsController,
         private _store: Store<any>,
         private authenticationService: AuthService) {
-
         _store.select('bookings').subscribe((response) => {
             this.bookings$ = response;
         });
     }
 
     public ngOnInit() {
-
         //Get permissions
         const token = this.authenticationService.decode();
         this._bookings.getPermission(token.user.uid).subscribe((data: any) => {

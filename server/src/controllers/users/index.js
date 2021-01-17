@@ -94,7 +94,7 @@ routes.push({
     },
     middleware: (req, res, next) => {
 
-        sequelize.query("SELECT u.id as uid,u.created_at,u.name,r.rid as type,u.lastname,u.username as userName,u.email,u.gender,u.age,u.organization,u.city,u.country,u.phone,u.mobile,u.active from users as u,user_role as ur,roles as r where u.id = ? and u.id = ur.uid and ur.rid = r.rid",
+        sequelize.query("SELECT u.id as uid,u.created_at,u.name,r.rid as type,r.name as role, u.lastname,u.username as userName,u.email,u.gender,u.age,u.organization,u.city,u.country,u.phone,u.mobile,u.active from users as u,user_role as ur,roles as r where u.id = ? and u.id = ur.uid and ur.rid = r.rid",
         {
             replacements: [req.params.id]
         })
@@ -194,7 +194,6 @@ routes.push({
             var id;
             return models.users.create(form).then((data) => {
                 id = data.dataValues.id;
-                console.log(req.body.type);
                 return models.sequelize.query('INSERT INTO user_role (uid, rid) VALUES (:uid, :rid)', {
                     transaction: t,
                     replacements: {
@@ -235,7 +234,7 @@ routes.push({
         const form = {
             name: req.body.name,
             // password: req.body.password,
-            type: req.body.type,
+            //type: req.body.type,
             active: req.body.active,
             phone: req.body.phone ? req.body.phone : null,
             mobile: req.body.mobile ? req.body.mobile : null,
@@ -246,39 +245,69 @@ routes.push({
             age: req.body.age ? req.body.age : null,
             gender: req.body.gender ? req.body.gender : null,
         };
-
-        console.log(form);
-        console.log(models.permission);
-
         // update record
-        models.users
-            .findOne({
-                where: {
-                    id: {
-                        [Sequelize.Op.eq]: req.params.id,
-                    },
-                },
-            })
-            .then((data) => {
-                return data.update(form);
-            })
-            .then((data) => {
-                res.json(data);
-                return next();
-            })
-            .catch((err) => {
-                if (err.name === 'SequelizeValidationError') {
-                    res.status(400);
-                    res.json({
-                        errors: err.errors,
-                        name: err.name,
-                    });
-                } else {
-                    res.json(err);
-                }
+        // models.users
+        //     .findOne({
+        //         where: {
+        //             id: {
+        //                 [Sequelize.Op.eq]: req.params.id,
+        //             },
+        //         },
+        //     })
+        //     .then((data) => {
+        //         return data.update(form);
+        //     })
+        //     .then((data) => {
+        //         res.json(data);
+        //         return next();
+        //     })
+        //     .catch((err) => {
+        //         if (err.name === 'SequelizeValidationError') {
+        //             res.status(400);
+        //             res.json({
+        //                 errors: err.errors,
+        //                 name: err.name,
+        //             });
+        //         } else {
+        //             res.json(err);
+        //         }
 
-                return next();
-            });
+        //         return next();
+        //     });
+
+            models.sequelize.transaction((t) => {
+                // create booking
+                var id;
+                return models.users.findOne({
+                    where: {
+                        id: {
+                            [Sequelize.Op.eq]: req.params.id,
+                        },
+                    },
+                })
+                .then((data) => {
+                    return data.update(form);
+                }).then((data) => {
+                    id = data.dataValues.id;
+                    return models.sequelize.query('UPDATE user_role set rid = :rid where uid = :uid', {
+                        transaction: t,
+                        replacements: {
+                            uid: data.dataValues.id,
+                            rid: req.body.type
+                        },
+                        type: Sequelize.QueryTypes.INSERT
+                    })
+                }).then((data) => {
+                    //return data;
+                    //res.send(200, data);
+                    res.json({id:id});
+                    return next();
+                }).catch((err) => {
+                    console.log(err);
+                    res.json(err);
+                    return next();
+                });
+            })
     },
 });
 

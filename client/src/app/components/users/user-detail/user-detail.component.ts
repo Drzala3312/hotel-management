@@ -37,7 +37,6 @@ export class UserDetailComponent implements OnInit {
           });
 
           this.userController.getUserById(this.id).subscribe((data: any) => {
-
               this._store.dispatch({
                   type: types.GET_USERS_SUCCESS,
                   payload: data

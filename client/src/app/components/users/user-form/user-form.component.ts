@@ -68,7 +68,6 @@ export class UserFormComponent implements OnInit {
                     itemName: item.name
                 };
             });
-          console.log(this.roles);
         }
     }, (error: any) => {
         console.log(error);
@@ -96,8 +95,6 @@ export class UserFormComponent implements OnInit {
                     active: data.active,
                 };
 
-                console.log(this.form)
-
             }, (error: any) => {
                 console.error(error);
             });
@@ -119,10 +116,8 @@ export class UserFormComponent implements OnInit {
                console.error(error);
             });
         } else {
-            // request create user
+            // request update user
             this.userController.updateUser(this.id, this.form).subscribe((data: any) => {
-
-
                 this.router.navigate(['/users/view', data.id]);
             }, (error: any) => {
                 console.error(error);

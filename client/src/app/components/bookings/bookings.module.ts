@@ -14,7 +14,7 @@ import { BookingsDetailComponent } from './detail/bookings.detail.component';
 import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 import { SearchFilterModule } from '../../pipes/searchFilter/searchFilter.module';
 import { MatNativeDateModule } from '@angular/material/core';
-import { BrowserModule  } from '@angular/platform-browser';
+//import { BrowserModule  } from '@angular/platform-browser';
 @NgModule({
     imports: [
         CommonModule,
@@ -27,7 +27,7 @@ import { BrowserModule  } from '@angular/platform-browser';
         LoadingSpinnerModule,
         SearchFilterModule,
         MatNativeDateModule,
-        BrowserModule,
+       // BrowserModule,
     ],
     declarations: [
         BookingsListComponent,
