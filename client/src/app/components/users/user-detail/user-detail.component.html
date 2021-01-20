@@ -29,23 +29,23 @@
                 <div class="row" *ngIf="user$.view">
                     <div class="col">
                         <b>Name</b>
-                        <p>{{ user$.view.name }} {{ user$.view.lastname }}</p>
+                        <p>{{ user$.view[0].name }} {{ user$.view[0].lastname }}</p>
                     </div>
                     <div class="col">
                         <b>User Name</b>
-                        <p>{{ user$.view.userName }}</p>
+                        <p>{{ user$.view[0].userName }}</p>
                     </div>
 
                 </div>
                 <div class="row" *ngIf="user$.view">
                     <div class="col">
                         <b>Role</b>
-                        <p>{{user$.view.type}}</p>
+                        <p>{{user$.view[0].role}}</p>
                     </div>
                     <div class="col">
                         <b>Active</b>
                         <p>
-                            {{ (user$.view.active == 1) ? 'Yes' : 'No' }}
+                            {{ (user$.view[0].active == 1) ? 'Yes' : 'No' }}
                         </p>
                     </div>
                 </div>
@@ -54,13 +54,13 @@
                     <div class="col">
                         <b>Age</b>
                         <p>
-                            {{ user$.view.age }}
+                            {{ user$.view[0].age }}
                         </p>
                     </div>
                     <div class="col">
                         <b>Gender</b>
                         <p>
-                            {{ (user$.view.gender == 'M') ? 'Male' : 'Female' }}
+                            {{ (user$.view[0].gender == 'M') ? 'Male' : 'Female' }}
                         </p>
                     </div>
                 </div>
@@ -68,16 +68,16 @@
                     <div class="col">
                         <b>Phone</b>
                         <p>
-                            <a href="tel:{{ user$.view.phone }}" title="Make a call">
-                                {{ user$.view.phone }}
+                            <a href="tel:{{ user$.view[0].phone }}" title="Make a call">
+                                {{ user$.view[0].phone }}
                             </a>
                         </p>
                     </div>
                     <div class="col">
                         <b>Mobile</b>
                         <p>
-                            <a href="tel:{{ user$.view.mobile }}" title="Make a call">
-                                {{ user$.view.mobile }}
+                            <a href="tel:{{ user$.view[0].mobile }}" title="Make a call">
+                                {{ user$.view[0].mobile }}
                             </a>
                         </p>
                     </div>
@@ -86,13 +86,13 @@
                     <div class="col">
                         <b>City</b>
                         <p>
-                            {{ user$.view.city }}
+                            {{ user$.view[0].city }}
                         </p>
                     </div>
                     <div class="col">
                         <b>Country</b>
                         <p>
-                            {{ user$.view.country }}
+                            {{ user$.view[0].country }}
                         </p>
                     </div>
                 </div>
@@ -100,15 +100,15 @@
                     <div class="col">
                         <b>Email</b>
                         <p>
-                            <a href="mailto:{{ user$.view.email }}" title="Send an email">
-                                {{ user$.view.email }}
+                            <a href="mailto:{{ user$.view[0].email }}" title="Send an email">
+                                {{ user$.view[0].email }}
                             </a>
                         </p>
                     </div>
                     <div class="col">
                         <b>Organization</b>
                         <p>
-                            {{ user$.view.organization }}
+                            {{ user$.view[0].organization }}
                         </p>
                     </div>
                 </div>

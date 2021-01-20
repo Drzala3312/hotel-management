@@ -60,7 +60,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         type: {
             type: Sequelize.INTEGER,
-
             allowNull: false,
             defaultValue: 2,
 
