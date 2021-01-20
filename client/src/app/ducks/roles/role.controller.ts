@@ -53,10 +53,14 @@ export class RoleController {
         return this.http.post(environment.api_url + '/rolePermissions', role);
     }
 
-    // public deleterolePermission(role: any){
-    //     return this.http.delete(environment.api_url + '/rolePermissions/' + role)
-    //     .subscribe(()=> console.log("DELETED"));
-    // }
+    getRolePermissionByID(roleId){
+        return this.http.get<any>(environment.api_url + '/rolePermissions/'+ roleId);
+    }
+    public deleterolePermission(roleId: any,pid:any){
+
+        return this.http.delete(environment.api_url + '/rolePermissions/'+ roleId+"/"+pid)
+        .subscribe(()=> console.log("DELETED"));
+    }
 
 
     /**
@@ -70,8 +74,8 @@ export class RoleController {
     public updaterole(roleId: number, role: any): Observable<any> {
         return this.http.put<any>(environment.api_url + '/roles/' + roleId, role);
     }
-    public deleterole(roleId: number){
-        return this.http.delete(environment.api_url + '/roles/' + roleId)
-        .subscribe(()=> console.log("DELETED"));
+    public deleterole(roleId: any){
+        return this.http.delete(environment.api_url + '/roles/' + roleId);
+
     }
 }

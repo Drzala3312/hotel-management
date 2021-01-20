@@ -20,13 +20,11 @@
 
 <div class="mat-elevation-z8">
     <mat-table #table mat-table [dataSource]="dataSource" class="table-responsive mat-elevation-z8" matSort>
-        <ng-container matColumnDef="detail">
-            <mat-header-cell *matHeaderCellDef mat-sort-header="detail">Details
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="id">Details
             </mat-header-cell>
             <mat-cell *matCellDef="let data">
-              <a [routerLink]="['view', data.rid]" title="View Guest Details" class="btn">
-                  <i class="fa fa-file-text-o "></i>
-              </a>
+               {{ data.rid}}
             </mat-cell>
           </ng-container>
 
@@ -42,6 +40,19 @@
           </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="permissions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="permissions">Permissions
+            </mat-header-cell>
+            <mat-cell *matCellDef="let data">
+              <ul>
+                  <div *ngFor="let item of selectedPermissions">
+                      <div *ngIf="item.rid === data.rid">
+                        {{item.itemName}}
+                      </div>
+                  </div>
+              </ul>
+            </mat-cell>
+          </ng-container>
 
 
         <ng-container matColumnDef="action">

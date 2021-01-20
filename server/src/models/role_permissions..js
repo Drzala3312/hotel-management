@@ -7,7 +7,9 @@ module.exports = function(sequelize, DataTypes) {
         rid: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+
+
         },
         pid: {
             type: Sequelize.INTEGER,

@@ -41,6 +41,68 @@ routes.push({
     },
 });
 
+
+/**
+ * @action list
+ * @method get
+ * @return rolePermissionsbyID[]
+ */
+
+routes.push({
+    meta: {
+        name: 'rolePermissionList',
+        method: 'GET',
+        paths: ['/rolePermissions/:id'],
+    },
+    middleware: (req, res, next) => {
+
+        models.role_permissions
+        .findAll({
+            where: {
+                rid: {
+                    [Sequelize.Op.eq]: req.params.id,
+                },
+            },
+            attributes: ['rid', 'pid'],
+
+            raw: true,
+        })
+        .then((data) => {
+            const resObj = data.map((role) => {
+                // tidy up the user data
+                return Object.assign(
+                    {},
+                    {
+                        rid: role.rid,
+                        pid: role.pid
+                    }
+                );
+            });
+            // const resObj =
+            //         {
+            //             rid: data.rid,
+            //             pid: data.pid,
+            //         }
+
+
+            res.json(resObj);
+            return next();
+        }) .catch((err) => {
+            if (err.name === 'SequelizeValidationError') {
+                res.status(400);
+                res.json({
+                    errors: err.errors,
+                    name: err.name,
+                });
+            } else {
+                res.json(err);
+            }
+            return next();
+        });
+
+    },
+});
+
 /**
  * @action create
  * @method post
@@ -81,6 +143,11 @@ routes.push({
     },
 });
 
+
+
+
+
+
 /**
  * @action delete
  * @method delete
@@ -90,17 +157,17 @@ routes.push({
     meta: {
         name: 'rolePermissionsDelete',
         method: 'DEL',
-        paths: ['/rolePermissions'],
+        paths: ['/rolePermissions/:rid/:pid'],
     },
     middleware: (req, res, next) => {
         models.role_permissions
             .destroy({
                 where: {
                     rid: {
-                        [Sequelize.Op.eq]: req.body.rid,
+                        [Sequelize.Op.eq]: req.params.rid,
                     },
                     pid: {
-                        [Sequelize.Op.eq]: req.body.pid,
+                        [Sequelize.Op.eq]: req.params.pid,
                     }
                 },
             })
